@@ -13,7 +13,7 @@ public class Main {
         switch (i) {
             case 1 -> {
                 e1.attendance(true);
-                System.out.println("1:Full Time wage \n 2:Part Time wage \n 3:Monthly Wage \n4: Calculate Wages Till Condition" );
+                System.out.println("1:Full Time wage \n 2:Part Time wage \n 3:Monthly Wage \n4: Calculate Wages Till Condition \n 5: Compute Employee Wage for Multiple Companies" );
                 Scanner sc= new Scanner(System.in);
                 System.out.println("Enter choice:");
                 int input=sc.nextInt();
@@ -22,6 +22,19 @@ public class Main {
                     case 2 ->e1.calculateDailyWage("part-time");
                     case 3 ->e1.calculateDailyWage("monthly");
                     case 4 -> e1.calculateWagesTillCondition();
+                    case 5 -> {
+                        System.out.println("Enter Company Details:");
+                        System.out.println("Company Name:");
+                        String companyName = sc.next();
+                        System.out.println("Wage Per Hour:");
+                        int wagePerHour = sc.nextInt();
+                        System.out.println("Max Working Hours Per Month:");
+                        int maxWorkingHours = sc.nextInt();
+                        System.out.println("Number of Working Days:");
+                        int workingDays = sc.nextInt();
+
+                        e1.computeWageForCompany(companyName, wagePerHour, maxWorkingHours, workingDays);
+                    }
                     default -> System.out.println("Enter correct option");
                 }
 

@@ -68,6 +68,31 @@ public class Employee {
         }
     }
 
+    public void computeWageForCompany(String companyName, int wagePerHour, int maxWorkingHours, int workingDays) {
+        int totalHours = 0;
+        int totalDays = 0;
+        int totalWage = 0;
+
+        Random random = new Random();
+
+        while (totalHours < maxWorkingHours && totalDays < workingDays) {
+            int dailyHours = random.nextInt(2) == 1 ? 8 : 4; // Randomly assign full-time or part-time
+            if (totalHours + dailyHours > maxWorkingHours) {
+                dailyHours = maxWorkingHours - totalHours; // Adjust hours if exceeding limit
+            }
+            totalHours += dailyHours;
+            totalDays++;
+            totalWage += wagePerHour * dailyHours;
+
+            System.out.println("Day " + totalDays + ": Worked " + dailyHours + " hours. Total Hours: " + totalHours + ". Daily Wage: " + (wagePerHour * dailyHours));
+        }
+
+        System.out.println("Company: " + companyName);
+        System.out.println("Total Days Worked: " + totalDays);
+        System.out.println("Total Hours Worked: " + totalHours);
+        System.out.println("Total Wage for the Month: " + totalWage);
+    }
+
 
 
     Employee(String name, int id){
