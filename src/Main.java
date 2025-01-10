@@ -13,7 +13,7 @@ public class Main {
         switch (i) {
             case 1 -> {
                 e1.attendance(true);
-                System.out.println("1:Full Time wage \n 2:Part Time wage \n 3:Monthly Wage");
+                System.out.println("1:Full Time wage \n 2:Part Time wage \n 3:Monthly Wage \n4: Calculate Wages Till Condition" );
                 Scanner sc= new Scanner(System.in);
                 System.out.println("Enter choice:");
                 int input=sc.nextInt();
@@ -21,6 +21,7 @@ public class Main {
                     case 1 ->e1.calculateDailyWage("full-time");
                     case 2 ->e1.calculateDailyWage("part-time");
                     case 3 ->e1.calculateDailyWage("monthly");
+                    case 4 -> e1.calculateWagesTillCondition();
                     default -> System.out.println("Enter correct option");
                 }
 
