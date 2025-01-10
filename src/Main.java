@@ -5,7 +5,15 @@ import java.util.Scanner;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        Employee e1=  new Employee("Ram",123);
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter Employee Details:");
+        System.out.print("Employee Name: ");
+        String name = sc.nextLine();
+        System.out.print("Employee ID: ");
+        int id = sc.nextInt();
+
+        Employee e1 = new Employee(name, id);
         Random r = new Random();
 
        int i = (r.nextInt(1000))%2;
@@ -14,7 +22,7 @@ public class Main {
             case 1 -> {
                 e1.attendance(true);
                 System.out.println("1:Full Time wage \n 2:Part Time wage \n 3:Monthly Wage \n4: Calculate Wages Till Condition \n 5: Compute Employee Wage for Multiple Companies" );
-                Scanner sc= new Scanner(System.in);
+
                 System.out.println("Enter choice:");
                 int input=sc.nextInt();
                 switch (input){
@@ -33,7 +41,9 @@ public class Main {
                         System.out.println("Number of Working Days:");
                         int workingDays = sc.nextInt();
 
-                        e1.computeWageForCompany(companyName, wagePerHour, maxWorkingHours, workingDays);
+                        EmpWageBuilder empWageBuilder = new EmpWageBuilder(companyName, wagePerHour, maxWorkingHours, workingDays);
+                        empWageBuilder.computeWages();
+                        empWageBuilder.displayTotalWage();
                     }
                     default -> System.out.println("Enter correct option");
                 }
