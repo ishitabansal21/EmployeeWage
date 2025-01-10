@@ -8,7 +8,10 @@ public class Main {
         Random r = new Random();
         int i = (r.nextInt(1000))%2;
         switch (i){
-            case 1 -> e1.attendance(true);
+            case 1 -> {
+                e1.attendance(true);
+                e1.calculateDailyWage();
+            }
             default -> e1.attendance(false);
         }
     }
