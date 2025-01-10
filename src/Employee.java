@@ -21,7 +21,7 @@ public class Employee {
         }
     }
 
-
+//already made class methods
     public void calculateDailyWage(String workType) {
         if (attendance) {
             int hoursWorked = switch (workType) {
