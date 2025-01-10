@@ -1,38 +1,47 @@
-public class EmpWageBuilder {
-    private String companyName;
-    private int wagePerHour;
-    private int maxWorkingHours;
-    private int workingDays;
-    private int totalWage;
+import java.util.ArrayList;
+import java.util.List;
 
-    public EmpWageBuilder(String companyName, int wagePerHour, int maxWorkingHours, int workingDays) {
-        this.companyName = companyName;
-        this.wagePerHour = wagePerHour;
-        this.maxWorkingHours = maxWorkingHours;
-        this.workingDays = workingDays;
-        this.totalWage = 0;
+public class EmpWageBuilder {
+    private final List<CompanyEmpWage> companyEmpWageList;
+
+    public EmpWageBuilder() {
+        companyEmpWageList = new ArrayList<>();
+    }
+
+    public void addCompanyEmpWage(String companyName, int wagePerHour, int maxWorkingHours, int workingDays) {
+        CompanyEmpWage companyEmpWage = new CompanyEmpWage(companyName, wagePerHour, maxWorkingHours, workingDays);
+        companyEmpWageList.add(companyEmpWage);
     }
 
     public void computeWages() {
-        int totalHours = 0;
-        int totalDays = 0;
+        for (CompanyEmpWage companyEmpWage : companyEmpWageList) {
+            int totalWage = computeWageForCompany(companyEmpWage);
+            companyEmpWage.setTotalWage(totalWage);
+        }
+        displayAllWages();
+    }
 
-        while (totalHours < maxWorkingHours && totalDays < workingDays) {
-            int dailyHours = (int) (Math.random() * 2) == 1 ? 8 : 4;
-            if (totalHours + dailyHours > maxWorkingHours) {
-                dailyHours = maxWorkingHours - totalHours;
-            }
-            totalHours += dailyHours;
-            totalDays++;
-            int dailyWage = wagePerHour * dailyHours;
-            totalWage += dailyWage;
-
-            System.out.println("Day " + totalDays + ": Worked " + dailyHours + " hours. Daily Wage: " + dailyWage);
+    public void displayAllWages() {
+        for (CompanyEmpWage companyEmpWage : companyEmpWageList) {
+            System.out.println("Company: " + companyEmpWage.getCompanyName() + ", Total Wage: " + companyEmpWage.getTotalWage());
         }
     }
 
-    public void displayTotalWage() {
-        System.out.println("\nCompany: " + companyName);
-        System.out.println("Total Wage for the Month: " + totalWage);
+    private int computeWageForCompany(CompanyEmpWage companyEmpWage) {
+        int totalHours = 0;
+        int totalDays = 0;
+        int totalWage = 0;
+
+        while (totalHours < companyEmpWage.getMaxWorkingHours() && totalDays < companyEmpWage.getWorkingDays()) {
+            int dailyHours = (int) (Math.random() * 2) == 1 ? 8 : 4;
+            if (totalHours + dailyHours > companyEmpWage.getMaxWorkingHours()) {
+                dailyHours = companyEmpWage.getMaxWorkingHours() - totalHours;
+            }
+            totalHours += dailyHours;
+            totalDays++;
+            totalWage += dailyHours * companyEmpWage.getWagePerHour();
+        }
+
+        return totalWage;
     }
 }

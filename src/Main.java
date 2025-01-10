@@ -17,11 +17,11 @@ public class Main {
         Random r = new Random();
 
        int i = (r.nextInt(1000))%2;
-        //int attendanceType = r.nextInt(3);
+        EmpWageBuilder empWageBuilder = new EmpWageBuilder();
         switch (i) {
             case 1 -> {
                 e1.attendance(true);
-                System.out.println("1:Full Time wage \n 2:Part Time wage \n 3:Monthly Wage \n4: Calculate Wages Till Condition \n 5: Compute Employee Wage for Multiple Companies" );
+                System.out.println("1:Full Time wage \n 2:Part Time wage \n 3:Monthly Wage \n4: Calculate Wages Till Condition \n 5: Compute Employee Wage for Multiple Companies \n 6: Display All Company Wages" );
 
                 System.out.println("Enter choice:");
                 int input=sc.nextInt();
@@ -31,20 +31,27 @@ public class Main {
                     case 3 ->e1.calculateDailyWage("monthly");
                     case 4 -> e1.calculateWagesTillCondition();
                     case 5 -> {
-                        System.out.println("Enter Company Details:");
-                        System.out.println("Company Name:");
-                        String companyName = sc.next();
-                        System.out.println("Wage Per Hour:");
-                        int wagePerHour = sc.nextInt();
-                        System.out.println("Max Working Hours Per Month:");
-                        int maxWorkingHours = sc.nextInt();
-                        System.out.println("Number of Working Days:");
-                        int workingDays = sc.nextInt();
+                        while (true) {
+                            System.out.println("Enter Company Details:");
+                            System.out.print("Company Name: ");
+                            sc.nextLine(); // Consume leftover newline
+                            String companyName = sc.nextLine();
+                            System.out.print("Wage Per Hour: ");
+                            int wagePerHour = sc.nextInt();
+                            System.out.print("Max Working Hours Per Month: ");
+                            int maxWorkingHours = sc.nextInt();
+                            System.out.print("Number of Working Days: ");
+                            int workingDays = sc.nextInt();
 
-                        EmpWageBuilder empWageBuilder = new EmpWageBuilder(companyName, wagePerHour, maxWorkingHours, workingDays);
+                            empWageBuilder.addCompanyEmpWage(companyName, wagePerHour, maxWorkingHours, workingDays);
+
+                            System.out.print("Add another company? (yes/no): ");
+                            String choice = sc.next();
+                            if (!choice.equalsIgnoreCase("yes")) break;
+                        }
                         empWageBuilder.computeWages();
-                        empWageBuilder.displayTotalWage();
                     }
+                    case 6 -> empWageBuilder.displayAllWages();
                     default -> System.out.println("Enter correct option");
                 }
 
