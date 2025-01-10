@@ -5,6 +5,7 @@ public class Employee {
     static final int WAGE_PER_HOUR = 20;
     static final int FULL_DAY_HOURS = 8;
     static final int PART_TIME_HOURS = 4;
+    static final int WORKING_DAYS=20;
 
     public void attendance(boolean a){
         if(a){
@@ -21,6 +22,7 @@ public class Employee {
             int hoursWorked = switch (workType) {
                 case "full-time" -> FULL_DAY_HOURS;
                 case "part-time" -> PART_TIME_HOURS;
+                case "monthly"   -> FULL_DAY_HOURS*WORKING_DAYS;
                 default -> 0;
             };
 
