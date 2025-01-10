@@ -5,6 +5,9 @@ public class Employee {
     static final int WAGE_PER_HOUR = 20;
     static final int FULL_DAY_HOURS = 8;
 
+    static final int PART_TIME_HOURS = 4;
+
+
     public void attendance(boolean a){
         if(a){
             attendance = true;
@@ -15,9 +18,18 @@ public class Employee {
         }
     }
 
-    public void calculateDailyWage() {
+
+    public void calculateDailyWage(String workType) {
         if (attendance) {
-            int dailyWage = WAGE_PER_HOUR * FULL_DAY_HOURS;
+            int hoursWorked = switch (workType) {
+                case "full-time" -> FULL_DAY_HOURS;
+                case "part-time" -> PART_TIME_HOURS;
+                default -> 0;
+            };
+
+            int dailyWage = WAGE_PER_HOUR * hoursWorked;
+            System.out.println("Work Type: " + workType);
+
             System.out.println("Daily Wage of the employee: " + dailyWage);
         } else {
             System.out.println("No wage as the employee is absent.");
