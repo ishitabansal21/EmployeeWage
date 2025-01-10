@@ -7,6 +7,7 @@ public class Main {
     public static void main(String[] args) {
         Employee e1=  new Employee("Ram",123);
         Random r = new Random();
+
        int i = (r.nextInt(1000))%2;
         //int attendanceType = r.nextInt(3);
         switch (i) {
@@ -21,6 +22,7 @@ public class Main {
                     case 2 ->e1.calculateDailyWage("part-time");
                     default -> System.out.println("Enter correct option");
                 }
+
 
             }
 

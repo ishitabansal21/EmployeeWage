@@ -4,7 +4,9 @@ public class Employee {
     boolean attendance= false;
     static final int WAGE_PER_HOUR = 20;
     static final int FULL_DAY_HOURS = 8;
+
     static final int PART_TIME_HOURS = 4;
+
 
     public void attendance(boolean a){
         if(a){
@@ -16,6 +18,7 @@ public class Employee {
         }
     }
 
+
     public void calculateDailyWage(String workType) {
         if (attendance) {
             int hoursWorked = switch (workType) {
@@ -26,6 +29,7 @@ public class Employee {
 
             int dailyWage = WAGE_PER_HOUR * hoursWorked;
             System.out.println("Work Type: " + workType);
+
             System.out.println("Daily Wage of the employee: " + dailyWage);
         } else {
             System.out.println("No wage as the employee is absent.");
